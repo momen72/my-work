@@ -21,7 +21,7 @@ const Radio = () => {
                         <div id="menu" className={`${mobileOpen ? 'max-md:w-full' : 'max-md:w-0'} max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/50 max-md:backdrop-blur max-md:flex-col max-md:justify-center flex items-center gap-8 text-sm`}>
                             <NavLink to="/home" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"} > Home </NavLink>
                             <NavLink to="/services" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Services</NavLink>
-                            <NavLink to="/experience" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Experience</NavLink>
+                            <NavLink to="/login" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Login</NavLink>
                             <NavLink to="/signup" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>SignUp</NavLink>
 
                             <button id="close-menu" onClick={() => setMobileOpen(false)} className="md:hidden bg-gray-900 hover:bg-gray-800 text-white p-2 rounded-md aspect-square font-medium transition">

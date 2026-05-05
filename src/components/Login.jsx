@@ -1,200 +1,149 @@
-// import React, { useContext } from 'react';
-import styled from 'styled-components';
-// import axios from 'axios'
-import { Counter } from '../context/Countercontext';
+import React, { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import * as zod from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import axios from 'axios'
 
+const loginSchema = zod.object({
+  email: zod.string().email("Email is not in correct format"),
+  password: zod.string().nonempty("Password is required").min(6, "Password must be at least 6 characters"),
+})
 
+export default function Login() {
+  const { handleSubmit, register, formState } = useForm({
+    mode: 'onBlur',
+    resolver: zodResolver(loginSchema),
+  })
 
+  const [success, setSuccess] = useState(false)
+  const [failure, setFailure] = useState(null)
+  const [loading, setLoading] = useState(false)
 
-const Form = () => {
-//   const [settoken]=useContext(Counter)
-//   function mysubmit (value){
-  
-// console.log("submit " , value)
-// axios.post('https://linked-posts.routemisr.com/users/signup' , value).
-// then(function(err){
-// console.log(err.response.data.token)
-// settoken(err.response.data.token) 
-// //  كدة انا اخدت التوكن
-//     }
-// ).
-// catch(
-//     function(err){
-//         console.log(err.response.data.error)
-//     }
-// )
-// }
+  function mysubmit(value) {
+    setLoading(true)
+    axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', value)
+      .then(function (res) {
+        console.log(res.data)
+        setSuccess(true)
+        setLoading(false)
+        setTimeout(() => setSuccess(false), 3000)
+      })
+      .catch(function (err) {
+        console.log(err.response.data.message)
+        setFailure(err.response.data.message)
+        setLoading(false)
+        setTimeout(() => setFailure(null), 3000)
+      })
+  }
+
+  const inputClass ='p-2.5 w-full bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/40 focus:outline-none focus:border-blue-400 focus:bg-white/15 transition-all duration-300'
+  const errorClass = 'text-red-400 text-sm mt-1'
+
   return (
-    <div className='bg-black text-white flex flex-col items-center bg-[url("https://assets.prebuiltui.com/images/components/hero-section/hero-background-image.png")] bg-cover bg-center bg-no-repeat pb-10'>
-    
+    <div
+      className="min-h-screen bg-black text-white flex items-center justify-center bg-[url('https://assets.prebuiltui.com/images/components/hero-section/hero-background-image.png')] bg-cover bg-center bg-no-repeat"
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50" />
 
-    <StyledWrapper>
-      <form className="form m-auto w-full mt-24">
-        <p className="title">Register </p>
-        <p className="message">Signup now and get full access to our app. </p>
-        <div className="flex">
-          <label className='w-100'>
-            <input required placeholder type="text" className="input" />
-            <span>Firstname</span>
-          </label>
-          <label className='w-100'>
-            <input required placeholder type="text" className="input" />
-            <span>Lastname</span>
-          </label>
-        </div>  
-        <label>
-          <input required placeholder type="email" className="input" />
-          <span>Email</span>
-        </label> 
-        <label>
-          <input required placeholder type="password" className="input" />
-          <span>Password</span>
-        </label>
-        <label>
-          <input required placeholder type="password" className="input" />
-          <span>Confirm password</span>
-        </label>
-        <button className="submit">Submit</button>
-        <p className="signin">Already have an acount ? <a href="#">Signin</a> </p>
-      </form>
-    </StyledWrapper>
-  </div>
-  );
+      {/* Card */}
+      <div className="relative z-10 w-full max-w-md mx-4">
+
+        {/* Alerts */}
+        {success && (
+          <div className="mb-4 text-center bg-green-500/80 backdrop-blur text-white p-3 rounded-lg">
+            ✅ Logged in successfully!
+          </div>
+        )}
+        {failure && (
+          <div className="mb-4 text-center bg-red-500/80 backdrop-blur text-white p-3 rounded-lg">
+            ❌ {failure}
+          </div>
+        )}
+
+        {/* Glass Card */}
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 shadow-2xl">
+
+          {/* Header */}
+          <div className="mb-8 text-center">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 border border-blue-400/40 mb-4">
+              <svg className="w-8 h-8 text-[]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+              </svg>
+            </div>
+            <h1 className="text-3xl font-bold tracking-tight">Welcome Back</h1>
+            <p className="text-white/50 mt-1 text-sm">Sign in to your account</p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit(mysubmit)} className="space-y-5">
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-medium text-white/70 mb-1.5">
+                Email Address
+              </label>
+              <input
+                id="email"
+                {...register("email")}
+                type="email"
+                className={inputClass}
+                placeholder="example@gmail.com"
+              />
+              {formState.touchedFields.email && formState.errors.email && (
+                <p className={errorClass}>{formState.errors.email.message}</p>
+              )}
+            </div>
+
+            {/* Password */}
+            <div>
+              <label className="block text-sm font-medium text-white/70 mb-1.5">
+                Password
+              </label>
+              <input
+                id="password"
+                {...register("password")}
+                type="password"
+                className={inputClass}
+                placeholder="••••••••"
+              />
+              {formState.touchedFields.password && formState.errors.password && (
+                <p className={errorClass}>{formState.errors.password.message}</p>
+              )}
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full mt-2 py-3 px-6 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500/50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              {loading ? (
+                <>
+                  <svg className="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                  Signing in...
+                </>
+              ) : (
+                'Sign In'
+              )}
+            </button>
+          </form>
+
+          {/* Footer */}
+          <p className="text-center text-white/40 text-sm mt-6">
+            Don't have an account?{' '}
+            <a href="/signup" className="text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium">
+              Sign Up
+            </a>
+          </p>
+
+        </div>
+      </div>
+    </div>
+  )
 }
-
-const StyledWrapper = styled.div`
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    // max-width: 350px;
-    // width:100%
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 20px;
-    position: relative;
-  }
-
-  .title {
-    font-size: 28px;
-    color: royalblue;
-    font-weight: 600;
-    letter-spacing: -1px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding-left: 30px;
-  }
-
-  .title::before,.title::after {
-    position: absolute;
-    content: "";
-    height: 16px;
-    width: 16px;
-    border-radius: 50%;
-    left: 0px;
-    background-color: royalblue;
-  }
-
-  .title::before {
-    width: 18px;
-    height: 18px;
-    background-color: royalblue;
-  }
-
-  .title::after {
-    width: 18px;
-    height: 18px;
-    animation: pulse 1s linear infinite;
-  }
-
-  .message, .signin {
-    color: rgba(88, 87, 87, 0.822);
-    font-size: 14px;
-  }
-
-  .signin {
-    text-align: center;
-  }
-
-  .signin a {
-    color: royalblue;
-  }
-
-  .signin a:hover {
-    text-decoration: underline royalblue;
-  }
-
-  .flex {
-    display: flex;
-    width: 100%;
-    gap: 6px;
-    
-
-  }
-
-  .form label {
-    position: relative;
-  }
-
-  .form label .input {
-    width: 100%;
-    padding: 10px 10px 20px 10px;
-    outline: 0;
-    border: 1px solid rgba(105, 105, 105, 0.397);
-    border-radius: 10px;
-  }
-
-  .form label .input + span {
-    position: absolute;
-    left: 10px;
-    top: 15px;
-    color: grey;
-    font-size: 0.9em;
-    cursor: text;
-    transition: 0.3s ease;
-  }
-
-  .form label .input:placeholder-shown + span {
-    top: 15px;
-    font-size: 0.9em;
-  }
-
-  .form label .input:focus + span,.form label .input:valid + span {
-    top: 30px;
-    font-size: 0.7em;
-    font-weight: 600;
-  }
-
-  .form label .input:valid + span {
-    color: green;
-  }
-
-  .submit {
-    border: none;
-    outline: none;
-    background-color: royalblue;
-    padding: 10px;
-    border-radius: 10px;
-    color: #fff;
-    font-size: 16px;
-    transform: .3s ease;
-  }
-
-  .submit:hover {
-    background-color: rgb(56, 90, 194);
-  }
-
-  @keyframes pulse {
-    from {
-      transform: scale(0.9);
-      opacity: 1;
-    }
-
-    to {
-      transform: scale(1.8);
-      opacity: 0;
-    }
-  }`;
-
-export default Form;
