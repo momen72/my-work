@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { NavLink } from "react-router-dom";
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
@@ -66,8 +67,8 @@ export default function Login() {
 
           {/* Header */}
           <div className="mb-8 text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-500/20 border border-blue-400/40 mb-4">
-              <svg className="w-8 h-8 text-[]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#A6FF5D] border border-blue-400/40 mb-4">
+              <svg className="w-8 h-8 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
@@ -117,7 +118,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full mt-2 py-3 px-6 bg-blue-500 hover:bg-blue-600 disabled:bg-blue-500/50 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
+              className="w-full mt-2 py-3 px-6 bg-[#A6FF5D] hover:bg-white disabled:bg-blue-500/50 disabled:cursor-not-allowed text-black font-semibold rounded-xl transition-all duration-300 flex items-center justify-center gap-2"
             >
               {loading ? (
                 <>
@@ -137,9 +138,9 @@ export default function Login() {
           {/* Footer */}
           <p className="text-center text-white/40 text-sm mt-6">
             Don't have an account?{' '}
-            <a href="/signup" className="text-blue-400 hover:text-blue-300 transition-colors duration-200 font-medium">
+            <NavLink to="/signup" className="text-[#A6FF5D] hover:text-white transition-colors duration-200 font-medium">
               Sign Up
-            </a>
+            </NavLink>
           </p>
 
         </div>
