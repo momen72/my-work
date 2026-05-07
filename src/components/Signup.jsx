@@ -37,7 +37,7 @@ export default function Signup() {
       })
   }
 
-  const inputClass = 'p-2 w-full border-2 border-gray-300 rounded focus:outline-none focus:border-blue-500 text-black'
+  const inputClass = 'p-2 w-full border-2 border-gray-300 rounded bg-white/40 focus:border-blue-500 text-black'
   const errorClass = 'text-red-500 text-sm mt-1'
 
   return (
@@ -104,7 +104,7 @@ export default function Signup() {
 
         <button
           type='submit'
-          className='mt-6 border-2 border-blue-500 px-8 py-3 rounded-2xl text-blue-500 hover:bg-blue-500 hover:text-white duration-300 cursor-pointer'
+          className='mt-6 border-2 border-[#A6FF5D] px-8 py-3 rounded-2xl text-[#A6FF5D] hover:bg-[#A6FF5D] hover:text-black duration-300 cursor-pointer'
         >
           Submit
         </button>
