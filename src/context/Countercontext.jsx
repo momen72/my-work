@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Counter } from "./Counter"
+import { Counter } from "./CounterProvider"
 
 
 export default function Countercontext({children}) {
