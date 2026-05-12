@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
-import { Counter } from '../context/Countercontext';
+import { Counter } from '../context/CounterProvider';
 
 const loginSchema = zod.object({
   email: zod.string().email("Email is not in correct format"),
