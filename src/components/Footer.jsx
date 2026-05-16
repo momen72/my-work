@@ -21,7 +21,7 @@ export default function Footer() {
             <div className="text-center sm:flex items-center justify-between border-t border-gray-400 mx-[10%] mt-12 py-3">
                 <div>
                     <FontAwesomeIcon icon={faEnvelope} />
-                    <span href=""> moemenelroweny72@gmail.com</span>
+                    <span> moemenelroweny72@gmail.com</span>
                 </div>
                 {/* <p>© {new Date().getFullYear()} All rights reserved.</p> */}
                 <ul className="flex items-center gap-10 justify-center mt-4 sm:mt-0">
