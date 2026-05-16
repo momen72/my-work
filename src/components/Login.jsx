@@ -73,7 +73,7 @@ export default function Login() {
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
-            <h1 className="text-3xl font-bold tracking-tight">Hello</h1>
+            
             <h1 className="text-3xl font-bold tracking-tight">Welcome Back</h1>
             <p className="text-white/50 mt-1 text-sm">Sign in to your account</p>
           </div>
