@@ -1,13 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/Untitled-1 copy.svg"
+import { Counter } from '../context/CounterProvider';
 
 
 const Radio = () => {
     
     const [mobileOpen, setMobileOpen] = React.useState(false);
-
+    const { usertoken } = useContext(Counter);
   return (
                     <nav className="flex flex-col items-center w-full fixed bg-transparent z-50 bg-black/30 backdrop-blur-md" >
                     <div className="flex items-center justify-between h-20 md:px-16 lg:px-24 xl:px-32 md:py-4 w-full">
@@ -21,8 +22,9 @@ const Radio = () => {
                         <div id="menu" className={`${mobileOpen ? 'max-md:w-full' : 'max-md:w-0'} max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/50 max-md:backdrop-blur max-md:flex-col max-md:justify-center flex items-center gap-8 text-sm`}>
                             <NavLink to="/home" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"} > Home </NavLink>
                             <NavLink to="/services" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Services</NavLink>
-                            <NavLink to="/login" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Login</NavLink>
-                            <NavLink to="/signup" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>SignUp</NavLink>
+                            {usertoken ? <NavLink to="/profile" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Profile</NavLink> :
+                            <> <NavLink to="/login" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Login</NavLink>
+                            <NavLink to="/signup" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>SignUp</NavLink></>}
 
                             <button id="close-menu" onClick={() => setMobileOpen(false)} className="md:hidden bg-gray-900 hover:bg-gray-800 text-white p-2 rounded-md aspect-square font-medium transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
