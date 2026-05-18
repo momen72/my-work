@@ -26,7 +26,7 @@ const { settoken } = useContext(Counter)
     setLoading(true)
     axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', value)
       .then(function (res) {
-        console.log(res.data)
+        console.log(res.data.token)
         settoken(res.data.token) // عشان اخد التوكن
         setSuccess(true)
         setLoading(false)

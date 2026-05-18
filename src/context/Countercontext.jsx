@@ -13,7 +13,7 @@ function settoken(tkn){
 }
     
   return (
-    <Counter.Provider value={{usertoken,settoken}}> 
+    <Counter.Provider value={{usertoken,settoken,setusertoken}}> 
     {/* استخدام يوزرتوكين عشان اخد التوكن  */}
       {children}
     </Counter.Provider>
