@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { NavLink } from "react-router-dom";
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import axios from 'axios'
+import { Counter } from '../context/CounterProvider';
 
 const loginSchema = zod.object({
   email: zod.string().email("Email is not in correct format"),
   password: zod.string().nonempty("Password is required").min(6, "Password must be at least 6 characters"),
 })
+
 
 export default function Login() {
   const { handleSubmit, register, formState } = useForm({
@@ -19,12 +21,13 @@ export default function Login() {
   const [success, setSuccess] = useState(false)
   const [failure, setFailure] = useState(null)
   const [loading, setLoading] = useState(false)
-
+const { settoken } = useContext(Counter)
   function mysubmit(value) {
     setLoading(true)
     axios.post('https://ecommerce.routemisr.com/api/v1/auth/signin', value)
       .then(function (res) {
         console.log(res.data)
+        settoken(res.data.token) // عشان اخد التوكن
         setSuccess(true)
         setLoading(false)
         setTimeout(() => setSuccess(false), 3000)

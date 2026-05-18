@@ -8,8 +8,8 @@ import Navbar from './components/Navbar'
 import Signup from './components/Signup'
 import Services from './components/Services'
 import Experience from './components/Experience'
-
-// import Countercontext , {Counter} from './context/Countercontext'
+// import Countercontext from './context/Countercontext'
+import Countercontext from './context/Countercontext'
 // import { useContext } from 'react'
 
 const router =createBrowserRouter([
@@ -27,9 +27,9 @@ function App() {
   // const obj = useContext(Counter)
   // console.log(obj)
   return (
-    <>
+    <Countercontext>
       <RouterProvider router={router}/>
-    </>
+    </Countercontext>
   )
 }
 

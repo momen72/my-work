@@ -1,13 +1,14 @@
-import { createContext, useState } from "react"
+import { useState} from "react"
+import { Counter } from "./CounterProvider"
 
-export const Counter = createContext()
-
+// export { Counter }
 export default function Countercontext({children}) {
 
 const[usertoken,setusertoken]=useState(null)
 
 function settoken(tkn){
     setusertoken(tkn) 
+    console.log(usertoken)
     // كدة عشان ياخد التوكن
 }
     
