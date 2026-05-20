@@ -10,14 +10,11 @@ const Radio = () => {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const { usertoken , setusertoken} = useContext(Counter);
     const navigate = useNavigate();
-    async function handleLogout() {
-  fetch('https://ecommerce.routemisr.com/api/v1/auth/signout', {
-    method: 'POST',
-    credentials: 'include' // مهم جداً عشان يبعت الـ Cookie
-  })
+    function handleLogout() {
+    localStorage.removeItem('token')
   .then(() => {
     setusertoken(null)
-    navigate('/login')
+    navigate('/home')
   })
 }
   return (
@@ -33,7 +30,7 @@ const Radio = () => {
                         <div id="menu" className={`${mobileOpen ? 'max-md:w-full' : 'max-md:w-0'} max-md:fixed max-md:top-0 max-md:z-10 max-md:left-0 max-md:transition-all max-md:duration-300 max-md:overflow-hidden max-md:h-screen max-md:bg-black/50 max-md:backdrop-blur max-md:flex-col max-md:justify-center flex items-center gap-8 text-sm`}>
                             <NavLink to="/home" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"} > Home </NavLink>
                             <NavLink to="/services" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Services</NavLink>
-                            {usertoken ? <NavLink to="/login" onClick={() => {setMobileOpen(false); handleLogout();}} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Logout</NavLink> :
+                            {usertoken ? <NavLink to="/home" onClick={() => {setMobileOpen(false); handleLogout();}} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Logout</NavLink> :
                             <> <NavLink to="/login" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>Login</NavLink>
                             <NavLink to="/signup" onClick={() => setMobileOpen(false)} className={({ isActive }) => isActive ? "text-white font-bold" :"text-white/70 hover:text-white/80"}>SignUp</NavLink></>}
 

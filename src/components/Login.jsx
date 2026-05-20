@@ -28,6 +28,7 @@ const { settoken } = useContext(Counter)
       .then(function (res) {
         console.log(res.data.token)
         settoken(res.data.token) // عشان اخد التوكن
+        localStorage.setItem('token', res.data.token)
         setSuccess(true)
         setLoading(false)
         setTimeout(() => setSuccess(false), 3000)
