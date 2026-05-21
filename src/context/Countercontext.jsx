@@ -1,13 +1,16 @@
-import { useState} from "react"
-import { useEffect } from "react"
+import { useState , useEffect} from "react"
 import { Counter } from "./CounterProvider"
 
 // export { Counter }
 export default function Countercontext({children}) {
 
 const[usertoken,setusertoken]=useState(null)
-useEffect(functio)
-
+  useEffect(function() {
+    const mynewValue = localStorage.getItem('token')
+    if (mynewValue !== null) {
+      setusertoken(mynewValue)
+    }
+  }, [])
 function settoken(tkn){
     setusertoken(tkn) 
     console.log(usertoken)
