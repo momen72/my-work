@@ -10,15 +10,17 @@ import Services from './components/Services'
 import Experience from './components/Experience'
 // import Countercontext from './context/Countercontext'
 import Countercontext from './context/Countercontext'
+import Protectrouting from './context/Protectrouting'
+import Autionticated from './context/Autionticated'
 // import { useContext } from 'react'
 
 const router =createBrowserRouter([
   {path:"" , element:<Layout/> , children:[
     {path:"",element:<Home/>},
-    {path:"home",element:<Home/>},
-    {path:"login",element:<Login/>},
-    {path:"services",element:<Services/>},
-    {path:"signup",element:<Signup/>},
+    {path:"home",element:<Protectrouting><Home/></Protectrouting>},
+    {path:"login",element:<Autionticated><Login/></Autionticated>},
+    {path:"services",element:<Protectrouting><Services/></Protectrouting>},
+    {path:"signup",element:<Autionticated><Signup/></Autionticated>},
     {path:"*",element:<div>Erorr</div>},
   ]}
 ])
