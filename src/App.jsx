@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import Signup from './components/Signup'
 import Services from './components/Services'
 import Experience from './components/Experience'
+import Categories from './components/Categories'
 // import Countercontext from './context/Countercontext'
 import Countercontext from './context/Countercontext'
 import Protectrouting from './context/Protectrouting'
@@ -18,6 +19,7 @@ const router =createBrowserRouter([
   {path:"" , element:<Layout/> , children:[
     {path:"",element:<Home/>},
     {path:"home",element:<Protectrouting><Home/></Protectrouting>},
+    {path:"categories",element:<Protectrouting><Categories/></Protectrouting>},
     {path:"login",element:<Autionticated><Login/></Autionticated>},
     {path:"services",element:<Protectrouting><Services/></Protectrouting>},
     {path:"signup",element:<Autionticated><Signup/></Autionticated>},

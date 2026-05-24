@@ -39,6 +39,12 @@ const Radio = () => {
                     >
                         Services
                     </NavLink>
+                    <NavLink
+                        to="/categories"
+                        className={({ isActive }) => isActive ? "text-white font-bold" : "text-white/70 hover:text-white/80 transition-colors"}
+                    >
+                        Categories
+                    </NavLink>
                 </div>
                 </>}
 
@@ -152,6 +158,13 @@ const Radio = () => {
                         className={({ isActive }) => isActive ? "text-white font-bold text-lg" : "text-white/70 hover:text-white/90 text-lg transition-colors"}
                     >
                         Services
+                    </NavLink>
+                    <NavLink
+                        to="/categories"
+                        onClick={() => setMobileOpen(false)}
+                        className={({ isActive }) => isActive ? "text-white font-bold text-lg" : "text-white/70 hover:text-white/90 text-lg transition-colors"}
+                    >
+                        Categories
                     </NavLink>
                     </>)}
                    
