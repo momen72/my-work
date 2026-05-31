@@ -13,6 +13,7 @@ import Categories from './components/Categories'
 import Countercontext from './context/Countercontext'
 import Protectrouting from './context/Protectrouting'
 import Autionticated from './context/Autionticated'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 // import { useContext } from 'react'
 
 const router =createBrowserRouter([
@@ -26,14 +27,19 @@ const router =createBrowserRouter([
     {path:"*",element:<div>Erorr</div>},
   ]}
 ])
+
+const myqueryClient = new QueryClient()
+
 function App() {
 
   // const obj = useContext(Counter)
   // console.log(obj)
   return (
-    <Countercontext>
-      <RouterProvider router={router}/>
-    </Countercontext>
+    <QueryClientProvider client={myqueryClient}>
+      <Countercontext>
+        <RouterProvider router={router}/>
+      </Countercontext>
+    </QueryClientProvider>
   )
 }
 

@@ -1,16 +1,30 @@
-export default function Cards() {
+export default function Cards({ cat }) {
+    const STATIC = 'https://ecommerce.routemisr.com'
+    console.log(cat)
     return (
-        <div className="p-4 bg-white border border-gray-200 hover:-translate-y-1 transition duration-300 rounded-lg shadow shadow-black/10 max-w-80">
-            <img className="rounded-md max-h-40 w-full object-cover" src="https://images.unsplash.com/photo-1560264418-c4445382edbc?q=80&w=400" alt="officeImage" />
-            <p className="text-gray-900 text-xl font-semibold ml-2 mt-4">
-                Your Card Title
+        <div className="p-4 bg-black-100 border border-gray-200 hover:-translate-y-1 transition duration-300 rounded-lg shadow-none hover:shadow hover:shadow-[#A6FF5D] max-w-100">
+            <img 
+                className="rounded-md max-h-40 w-full object-cover" 
+                src={cat?.image} 
+                alt={cat?.name} 
+                onError={(e) => e.target.src = STATIC}
+            />
+            <p className="text-[#A6FF5D] text-xl font-semibold ml-2 mt-4">
+                {cat?.name}
+            </p>
+            
+            <p className="text-zinc-400 text-sm/6 mt-2 ml-2 mb-2">
+                {cat?.slug}
             </p>
             <p className="text-zinc-400 text-sm/6 mt-2 ml-2 mb-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore..
+                {cat?.createdAt.split('T')[0]}
             </p>
-            <button type="button" className="bg-indigo-600 hover:bg-indigo-700 transition cursor-pointer mt-4 mb-3 ml-2 px-6 py-2 font-medium rounded-md text-white text-sm">
+            <button 
+                type="button" 
+                className="bg-[#A6FF5D] hover:bg-white transition cursor-pointer mt-4 mb-3 ml-2 px-6 py-2 font-medium rounded-md text-black text-sm"
+            >
                 Learn More
             </button>
         </div>
     );
-};
+}
