@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import { Link , useNavigate } from 'react-router-dom';
 import Products from './Products';
 import About from './About';
+import Upload from './Upload';
+
 
 const Home = () => {
     const sectionRef = useRef();
@@ -61,6 +63,7 @@ const Home = () => {
                     <p className='text-sm text-white/50'>Scroll down</p>
                 </div>
             </header>
+            <Upload/>
             <About/>
             <div ref={sectionRef}>
             

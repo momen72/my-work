@@ -16,7 +16,13 @@ export default function Categories() {
                     token: localStorage.getItem('token')
                 }
             })
-        }
+        },
+        refetchOnMount: false, // ✅ مش عايزينها تعيد جلب البيانات لما الكومبوننت يترندر
+            refetchOnWindowFocus: false, // ✅ مش عايزينها تعيد جلب البيانات لما المستخدم يرجع للصفحة
+            gcTime: 5 * 60 * 1000, // ✅ وقت تخزين البيانات في الذاكرة (5 دقائق)
+                staleTime: 5 * 60 * 1000, // ✅ وقت اعتبار البيانات "طازجة" (5 دقائق)
+                retry: 2, // ✅ عدد مرات إعادة المحاولة في حالة الفشل
+                enabled: !!localStorage.getItem('token') // ✅ تشغيل الاستعلام فقط إذا كان هناك توكن في localStorage كدة هو بيشيك اذا كان اليوزر مسجل دخول ولا لأ، لو مفيش توكن مش هيحاول يجيب البيانات من السيرفر
     })
 
     // useEffect(() => {
