@@ -11,7 +11,7 @@ export default function Categories() {
     const { data, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: function() {
-            return axios.get('https://ecommerce.routemisr.com/api/v1/categories', {
+            return axios.get('https://ecommerce.routemisr.com/api/v1/products', {
                 headers: {
                     token: localStorage.getItem('token')
                 }

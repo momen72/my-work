@@ -45,6 +45,12 @@ const Radio = () => {
                     >
                         Categories
                     </NavLink>
+                    <NavLink
+                        to="/wishlist"
+                        className={({ isActive }) => isActive ? "text-white font-bold" : "text-white/70 hover:text-white/80 transition-colors"}
+                    >
+                        Wishlist
+                    </NavLink>
                 </div>
                 </>}
 
